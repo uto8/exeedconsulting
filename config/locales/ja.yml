@@ -1,0 +1,17 @@
+ja:
+  enums:
+    item: # モデル名
+      item_status: # カラム名
+        '---': "---"
+        new: '新品' # enumの値
+        unused: '未使用に近い' # enumの値
+        old: '使用済み' # enumの値
+      delivery_fees: # カラム名
+        '---': "---"
+        seller: '出品者' # enumの値
+        buyer: '購入者' # enumの値
+      delivery_days: # カラム名
+        '---': "---"
+        soon: '1~2日で発送' # enumの値
+        normal: '3~4日で発送' # enumの値
+        late: '4~7日で発送'
