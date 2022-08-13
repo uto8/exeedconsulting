@@ -1,8 +1,20 @@
 <div class="row">
   <% @items.each do |item| %>
-    <div class="col-2">
+    <div class="col-sm-6 col-lg-2 col-6">
       <%= link_to item_path(item) do %>
-        <%= item.title %>
+        <div class="position-relative text-center" style="background:#EEEEEE;">
+          <% if item.images.attached? %>
+            <%= image_tag item.images[0] ,style:"height:150px; width:100%; object-fit:cover;" %>
+          <% else %>
+          <div style="height:150px; width:100%;"></div>
+          <% end %>
+          <span class="position-absolute py-1 px-2" style="bottom:0; left:0; background:rgba(0, 0, 0, 0.7); color:#fff;">
+            <%= item.price %>
+          </span>
+        </div>
+        <p class="mt-2" style="color:black">
+          <%= item.title %>
+        </p>
       <% end %>
     </div>
   <% end %>

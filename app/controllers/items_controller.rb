@@ -24,9 +24,16 @@ class ItemsController < ApplicationController
   def edit
   end
 
+  def delete_photo
+    image = ActiveStorage::Attachment.find(params[:id])
+    image.purge
+    flash[:success] = "画像を削除しました"
+    redirect_back(fallback_location: root_path)
+  end
+
   private
   def item_params
-    params.require(:item).permit(:title, :price, :description, :user_id, :is_sold, :item_status, :delivery_fee, :delivery_day
+    params.require(:item).permit(:title, :price, :description, :user_id, :is_sold, :item_status, :delivery_fee, :delivery_day, images: []
     )
   end
 end
