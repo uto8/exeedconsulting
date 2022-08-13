@@ -5,4 +5,7 @@ class Item < ApplicationRecord
   enum delivery_day:{ soon: 0, normal: 1, late: 2 }
 
   has_many_attached :images
+
+  validates :title, presence: true
+  validates :price, presence: true
 end
