@@ -8,6 +8,7 @@ class ItemsController < ApplicationController
     if @item.save
       flash[:success] = "アイテムを作成しました"
       redirect_to item_path(@item)
+      # 遷移先設定
     else
       flash[:error] = "アイテムの作成に失敗しました"
       render 'new'

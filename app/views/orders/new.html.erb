@@ -4,9 +4,9 @@
     <hr class="mt-4">
     <div class="d-flex">
       <% if @item.images.attached? %>
-        <%= image_tag @item.images[0] ,style:"height:150px; width:100px; object-fit:cover;" %>
+        <%= image_tag @item.images[0], class:"mr-5" ,style:"height:150px; width:100px; object-fit:cover;" %>
       <% end %>
-      <div class="ml-5">
+      <div class="">
         <p><%= @item.title %></p>
         <strong><%= @item.price %></strong>
         <p>配送料の負担　<%= @item.delivery_fee_i18n %></p>

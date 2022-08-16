@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.create(order_params)
-    # @item = Item.find(params[:id])
+    @item = Item.find(params[:id])
     if @order.save
       flash[:success] = "購入しました"
       redirect_to orders_path
