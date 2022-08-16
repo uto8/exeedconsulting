@@ -16,9 +16,15 @@
   <div class="col-lg-5 col-12">
     <h2><%= @item.title %></h2>
     <h4 class="text-primary mb-4">¥<%= @item.price %></h4>
-    <div class="d-flex px-1 py-3" style="font-size:35px;">
-      <i class="fa-regular fa-heart"></i>
-    </div>
+    <% if @item.favorited?(current_user) %>
+      <%= link_to item_favorites_path(@item.id), method: :delete do %>
+          <span style="color:red; font-size:35px;"><i class="fa fa-heart" aria-hidden="true"></i></span>
+      <% end %>
+    <% else %>
+      <%= link_to item_favorites_path(@item.id), method: :post do %>
+          <span style="font-size:35px; color:black;"><i class="fa fa-heart" aria-hidden="true"></i></span>
+      <% end %>
+    <% end %>
     <%= link_to "購入手続き", new_order_path, class:"btn btn-block btn-primary mb-5" %>
     <h4>商品の説明</h4>
     <hr>

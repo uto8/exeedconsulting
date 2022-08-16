@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root 'pages#home'
   resources :orders, only: [:index]
   resources :items do
+    resource :favorites, only: [:create, :destroy]
     member do
       delete :delete_photo
       resources :orders, only: [:new, :create]

@@ -8,4 +8,9 @@ class Item < ApplicationRecord
 
   validates :title, presence: true
   validates :price, presence: true
+  has_many :favorites, dependent: :destroy
+
+  def favorited?(user)
+    favorites.where(user_id: user.id).exists?
+  end
 end
