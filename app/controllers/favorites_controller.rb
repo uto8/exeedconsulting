@@ -10,4 +10,8 @@ class FavoritesController < ApplicationController
     @favorite.destroy
     redirect_to item_path(params[:item_id])
   end
+
+  def index
+    @favorites = Favorite.where(user_id: current_user.id)
+  end
 end

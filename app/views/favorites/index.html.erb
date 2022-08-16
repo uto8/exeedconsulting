@@ -1,0 +1,23 @@
+<h4>いいね一覧</h4>
+<hr class="pb-5">
+<div class="row">
+  <% @favorites.each do |favorite| %>
+    <div class="col-sm-6 col-lg-2 col-6">
+      <%= link_to item_path(favorite.item) do %>
+        <div class="position-relative text-center" style="background:#EEEEEE;">
+          <% if favorite.item.images.attached? %>
+            <%= image_tag favorite.item.images[0] ,style:"height:150px; width:100%; object-fit:cover;" %>
+          <% else %>
+          <div style="height:150px; width:100%;"></div>
+          <% end %>
+          <span class="position-absolute py-1 px-2" style="bottom:0; left:0; background:rgba(0, 0, 0, 0.7); color:#fff;">
+            <%= favorite.item.price %>
+          </span>
+        </div>
+        <p class="mt-2" style="color:black">
+          <%= favorite.item.title %>
+        </p>
+      <% end %>
+    </div>
+  <% end %>
+</div>
