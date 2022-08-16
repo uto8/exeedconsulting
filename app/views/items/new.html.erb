@@ -34,11 +34,11 @@
       </div>
       <div class="form-group">
         <%= f.label :delivery_fee, "送料負担" %>
-        <%= f.select :delivery_fee, Item.delivery_fees.keys.map {|k| [I18n.t("enums.item.delivery_fees.#{k}"), k]}, {}, {class: 'form-control'} %>
+        <%= f.select :delivery_fee, Item.delivery_fees.keys.map {|k| [I18n.t("enums.item.delivery_fee.#{k}"), k]}, {}, {class: 'form-control'} %>
       </div>
       <div class="form-group">
         <%= f.label :delivery_day, "発送までの日にち" %>
-        <%= f.select :delivery_day, Item.delivery_days.keys.map {|k| [I18n.t("enums.item.delivery_days.#{k}"), k]}, {}, {class: 'form-control'} %>
+        <%= f.select :delivery_day, Item.delivery_days.keys.map {|k| [I18n.t("enums.item.delivery_day.#{k}"), k]}, {}, {class: 'form-control'} %>
       </div>
       <div class="form-group">
         <%= f.label :description, "説明" %>
