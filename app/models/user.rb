@@ -6,4 +6,7 @@ class User < ApplicationRecord
 
   has_many :items
   has_many :favorites, dependent: :destroy
+  has_many :orders
+  has_many :chats
+  has_many :entries
 end

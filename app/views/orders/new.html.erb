@@ -17,7 +17,7 @@
   <div class="col-5">
     <%= form_with(model:@order, url:orders_path, method: :post, local:true) do |f| %>
       <%= f.hidden_field :buyer_id, :value => current_user.id %>
-      <%= f.hidden_field :selller_id, :value => @item.user.id %>
+      <%= f.hidden_field :selller_id, :value => @item.user_id %>
       <%= f.hidden_field :item_id, :value => @item.id %>
       <%= f.submit "購入する", class:"btn btn-primary btn-block py-2" %>
     <% end %>

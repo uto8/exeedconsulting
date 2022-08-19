@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_16_064451) do
+ActiveRecord::Schema.define(version: 2022_08_16_122336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,25 @@ ActiveRecord::Schema.define(version: 2022_08_16_064451) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "chats", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "order_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_chats_on_order_id"
+    t.index ["user_id"], name: "index_chats_on_user_id"
+  end
+
+  create_table "entries", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_entries_on_item_id"
+    t.index ["user_id"], name: "index_entries_on_user_id"
+  end
+
   create_table "favorites", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "item_id", null: false
@@ -50,10 +69,10 @@ ActiveRecord::Schema.define(version: 2022_08_16_064451) do
     t.integer "price", null: false
     t.text "description"
     t.bigint "user_id"
-    t.boolean "is_sold"
-    t.integer "item_status", default: 1, null: false
-    t.integer "delivery_fee", default: 1, null: false
-    t.integer "delivery_day", default: 1, null: false
+    t.boolean "is_sold", default: false
+    t.integer "item_status", default: 0, null: false
+    t.integer "delivery_fee", default: 0, null: false
+    t.integer "delivery_day", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_items_on_user_id"
@@ -85,6 +104,10 @@ ActiveRecord::Schema.define(version: 2022_08_16_064451) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "chats", "orders"
+  add_foreign_key "chats", "users"
+  add_foreign_key "entries", "items"
+  add_foreign_key "entries", "users"
   add_foreign_key "favorites", "items"
   add_foreign_key "favorites", "users"
   add_foreign_key "items", "users"
