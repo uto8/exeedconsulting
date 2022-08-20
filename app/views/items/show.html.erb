@@ -31,7 +31,7 @@
     <p class="mb-5"><%= @item.description %></p>
     <h4>商品の情報</h4>
     <hr>
-    <table class="table table-borderless">
+    <table class="table table-borderless mb-4">
       <tbody>
         <tr>
           <th scope="row">商品の状態</th>
@@ -47,5 +47,21 @@
         </tr>
       </tbody>
     </table>
+    <h4>コメント</h4>
+    <hr>
+    <div style="position:relative;">
+      <% if @item_messages.present? %>
+        <div class="messages overflow-auto" style="height:20vh;">
+        </div>
+      <% end %>
+      <div class="form-group w-100 py-2 pb-5 text-center" style="position:absolute;">
+        <%= form_with(model: @item_message, url:item_path, method: :post, local:true) do |f| %>
+          <%= f.text_area :message, class:"form-control mb-3", placeholder:"コメントする", rows:"3" %>
+          <%= f.hidden_field :item_id, :value => @item.id %>
+          <%= f.hidden_field :user_id, :value => current_user.id %>
+          <%= f.submit "コメントを送信する", class:"btn btn-outline-primary btn-block" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

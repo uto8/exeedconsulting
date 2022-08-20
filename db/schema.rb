@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_16_122336) do
+ActiveRecord::Schema.define(version: 2022_08_19_065650) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,16 @@ ActiveRecord::Schema.define(version: 2022_08_16_122336) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "item_messages", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "item_id"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["item_id"], name: "index_item_messages_on_item_id"
+    t.index ["user_id"], name: "index_item_messages_on_user_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "title", null: false
     t.integer "price", null: false
@@ -110,6 +120,8 @@ ActiveRecord::Schema.define(version: 2022_08_16_122336) do
   add_foreign_key "entries", "users"
   add_foreign_key "favorites", "items"
   add_foreign_key "favorites", "users"
+  add_foreign_key "item_messages", "items"
+  add_foreign_key "item_messages", "users"
   add_foreign_key "items", "users"
   add_foreign_key "orders", "items"
   add_foreign_key "orders", "users", column: "buyer_id"
