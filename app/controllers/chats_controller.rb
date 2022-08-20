@@ -1,4 +1,6 @@
 class ChatsController < ApplicationController
+  before_action :autheniticate_user
+
   def show
     @order = Order.find(params[:id])
     @chat = Chat.new

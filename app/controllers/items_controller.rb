@@ -1,4 +1,7 @@
 class ItemsController < ApplicationController
+  before_action :autheniticate_user,  {only: [:new, :create, :edit, :delete_photo]}
+  before_action :item_user, {only: [:edit]}
+
   def new
     @item = Item.new
   end
@@ -41,5 +44,12 @@ class ItemsController < ApplicationController
 
   def item_messages_params
     params.require(:item_message).permit(:message, :item_id, :user_id)
+  end
+
+  def item_user
+    @items = current_user.items
+    @item = @items.find_by(id: params[:id])
+    flash[:error]="アカウントが違います"
+    redirect_to root_path unless @item
   end
 end
