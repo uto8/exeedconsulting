@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :orders
   has_many :chats
   has_many :entries
+
+  validates :name, presence: true
 end
