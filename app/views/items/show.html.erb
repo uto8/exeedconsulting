@@ -36,7 +36,7 @@
     <p class="mb-5"><%= @item.description %></p>
     <h4>商品の情報</h4>
     <hr>
-    <table class="table table-borderless">
+    <table class="table table-borderless mb-4">
       <tbody>
         <tr>
           <th scope="row">商品の状態</th>
@@ -52,5 +52,40 @@
         </tr>
       </tbody>
     </table>
+    <h4>コメント</h4>
+    <hr>
+    <div style="position:relative;">
+      <% if @item_messages.present? %>
+        <div class="messages overflow-auto" style="height:40vh;">
+          <% @item_messages.each do |chat| %>
+            <div class="<%= message(chat) %> mb-2">
+              <% unless chat.user == current_user %>
+                <div class="name">
+                  <%= chat.user.name %>
+                </div>
+              <% end %>
+              <div class="message">
+                <p><%= chat.message %></p>
+                <div class="text-right" style="color:#777777">
+                  <small>
+                    <%= chat.created_at.to_s(:datetime_jp) %>
+                  </small>
+                </div>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+      <% if user_signed_in? %>
+        <div class="form-group w-100 py-2 pb-5 text-center" style="position:absolute;">
+          <%= form_with(model: @item_message, method: :post, local:true) do |f| %>
+            <%= f.text_area :message, class:"form-control mb-3", placeholder:"コメントする", rows:"3" %>
+            <%= f.hidden_field :item_id, :value => @item.id %>
+            <%= f.hidden_field :user_id, :value => current_user.id %>
+            <%= f.submit "コメントを送信する", class:"btn btn-outline-primary btn-block" %>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

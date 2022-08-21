@@ -23,6 +23,8 @@ class ItemsController < ApplicationController
 
   def show
     @item = Item.find(params[:id])
+    @item_message = ItemMessage.new
+    @item_messages = ItemMessage.where(item_id: params[:id])
   end
 
   def edit
@@ -39,6 +41,10 @@ class ItemsController < ApplicationController
   def item_params
     params.require(:item).permit(:title, :price, :description, :user_id, :is_sold, :item_status, :delivery_fee, :delivery_day, images: []
     )
+  end
+
+  def item_messages_params
+    params.require(:item_message).permit(:message, :item_id, :user_id)
   end
 
   def item_user
