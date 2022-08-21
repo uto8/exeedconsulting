@@ -1,13 +1,13 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'pages#home'
-  resources :orders, only: [:index]
+  resources :orders, only: [:index, :create]
   get 'favorites', to: 'favorites#index'
   resources :items do
     resource :favorites, only: [:create, :destroy]
     member do
       delete :delete_photo
-      resources :orders, only: [:new, :create]
+      resources :orders, only: [:new]
     end
   end
   resources :chats
