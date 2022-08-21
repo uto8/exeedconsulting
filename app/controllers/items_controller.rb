@@ -24,6 +24,7 @@ class ItemsController < ApplicationController
   def show
     @item = Item.find(params[:id])
     @item_message = ItemMessage.new
+    @item_messages = ItemMessage.where(item_id: params[:id])
   end
 
   def edit
