@@ -8,19 +8,22 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.create(order_params)
-    @item = Item.find(params[:id])
-    if @order.save
+    @order = Order.new(params.require(:order).permit(
+      :buyer_id, :seller_id, :item_id
+    ))
+    # @item = Item.find(params[:id])
+    if @order.save!
       flash[:success] = "購入しました"
-      redirect_to orders_path
+      @order.item.update!(is_sold: true)
+      redirect_to chat_path(@order.item)
     else
       flash[:error] = "購入に失敗しました"
-      render 'show'
+      redirect_to root_path
     end
   end
 
   def index
-    @orders = Order.all
+    @orders = Order.where(buyer_id: current_user.id)
   end
 
   private
