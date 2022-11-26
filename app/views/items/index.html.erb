@@ -1,2 +1,21 @@
-<h1>Items#index</h1>
-<p>Find me in app/views/items/index.html.erb</p>
+<div class="row">
+  <div class="col-3"></div>
+  <div class="col-6">
+    <% @items.each do |item| %>
+      <% if @item.image.present? %>
+        <%= item.image, class:"w-100" %>
+      <%else%>
+        <%= image_tag class:"w-100" %>
+      <% end %>
+      <%= item.name %>
+      <table class="table">
+        <tr>
+          <td>
+            <%= item.price %>
+          </td>
+        </tr>
+      </table>
+    <% end %>
+  </div>
+  <div class="col-3"></div>
+</div>

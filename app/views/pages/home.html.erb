@@ -1,5 +1,21 @@
+<div class="card mb-5">
+  <div class="card-body">
+    <%= search_form_for(@q, url: root_path) do |f| %>
+      <div class="form-group">
+        <%= f.label "教科書名" %>
+        <%= f.text_field :title_cont, class:"form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label "大学名" %>
+        <%= f.text_field :university_university_name_eq, class:"form-control" %>
+      </div>
+      <br>
+      <%= f.submit '検索', class:"btn btn-primary shadow" %>
+    <% end %>
+  </div>
+</div>
 <div class="row">
-  <% @items.each do |item| %>
+  <% @items_results.each do |item| %>
     <div class="col-sm-6 col-lg-2 col-6">
       <%= link_to item_path(item) do %>
         <div class="position-relative text-center" style="background:#EEEEEE;">

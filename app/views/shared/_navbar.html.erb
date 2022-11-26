@@ -4,7 +4,8 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <%= link_to root_path, class:"navbar-brand"  do %>
-  <%= image_tag 'logo.png', class:"img-logo" %>
+  <%#= image_tag 'logo.png', class:"img-logo" %>
+  教科書売買
   <% end %>
 
   <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
@@ -20,6 +21,9 @@
         </li>
         <li class="nav-item">
           <%= link_to "出品", new_item_path, class:"nav-link" %>
+        </li>
+        <li class="nav-item">
+          <%= link_to 'ログアウト', destroy_user_session_path, class: 'nav-link', method: :delete %>
         </li>
       </ul>
     <% else %>
